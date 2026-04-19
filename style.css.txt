@@ -1,0 +1,18 @@
+async function converter() {
+  let valor = document.getElementById("valor").value;
+  let de = document.getElementById("de").value;
+  let para = document.getElementById("para").value;
+
+  if (!valor) return;
+
+  let url = `https://api.frankfurter.app/latest?from=${de}&to=${para}`;
+
+  let resposta = await fetch(url);
+  let dados = await resposta.json();
+
+  let taxa = dados.rates[para];
+  let resultado = valor * taxa;
+
+  document.getElementById("resultado").innerText =
+    `${valor} ${de} = ${resultado.toFixed(2)} ${para}`;
+}
